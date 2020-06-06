@@ -1,7 +1,11 @@
 var arr = [];
+var arr_left_right_space = [];
+var array_length = 32;
+var total_node = 1;
+
 function addvalue() {
-	for(var i = 0; i < 31; i++)
-		arr.push(Math.floor((Math.random() * 1000) + 1));
+	for(var i = 0; i < array_length; i++)
+		arr[i] = (Math.floor((Math.random() * 1000) + 1));
 }
 const SinglyLinkedListNode = class {
     constructor(nodeData, id) {
@@ -74,8 +78,8 @@ async function InorderTraversal() {
 
 async function Inorder() {
 	var div = document.getElementById('printing');
-	for(var i = 0;  i  < 10; i++) {
-		div.innerHTML += i;
+	for(var i = 0;  i  < array_length; i++) {
+		div.innerHTML += arr[i] + " ";
 		await sleep(timing*100);
 	}
 }
@@ -83,46 +87,53 @@ async function Inorder() {
 
 function msg(){  
     alert("Hello Avinash");  
-}  
+}
 function General_Tree() {
 	addvalue();
-	var maxi = 32;
+	for(var i = 0; i < array_length; i++)
+		console.log(arr[i]);
 	let llist = new SinglyLinkedList();
-    for (let i = 1; i < maxi; i++) {
+    for (let i = 1; i < array_length; i++) {
     	var data = document.getElementById(i.toString()).innerHTML;
     	if(data.includes('<br>') || data != parseInt(data).toString()){
     		alert("Inserted Data is not in Correct Format");
     		break;
     	}
-    	console.log(parseInt(data));
+    	//console.log(parseInt(data));
         llist.insertNode(data, i.toString());
     }
+    var tableadd  = "<table border='1'>";
+    arr_left_right_space[0] = 0;
+    for(var i = 0; i < 5; i++)
+    	arr_left_right_space[i + 1] = (arr_left_right_space[i] * 2) + 1;
+    // Generating Table
+    for(var i = 0, a = 0; i < 5; i++) {
+    	tableadd += "<tr>";
+    	console.log(arr_left_right_space[4 - i]);
+    	for(var j = 0; j < arr_left_right_space[5 - i]; j++)
+    		tableadd += "<td>=</td>";
+    	if(i == 0) 
+    		tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
+    	else {
+    		tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
+    		for(var j = 0; j < total_node; j++)
+    				tableadd += "<td></td>"
+				tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
+		}
+    	for(var j = 0; j < arr_left_right_space[5 - i]; j++)
+    		tableadd += "<td></td>";
+    	tableadd += "</td>";
+    }
+    tableadd += "</table>";
+    document.getElementById("Generate_Table").innerHTML = tableadd;
+    // Table Work Completed.
   	console.log("=============================");
-    let node = llist.head;
+    /*let node = llist.head;
     while (node != null) {
-        console.log(String(node.data));
+        //console.log(String(node.data));
         node = node.next;
     }
-	// var height1 = 3;
-	// var width1 = 3;	
-	// var tree = document.getElementById('General_Tree');
-	// var arr = [];
-	// var div = '';
-	// for(var i = 0; i < height1; i++) {
-	// 	arr[i] = [];
-	// 	for(var j = 0; j < width1; j++) {
-	// 		if(j == 0)
-	// 			arr[i][j] = '<div class="circle_hide">a';
-	// 		else
-	// 			arr[i][j] = '</div><div class="circle_display">';
-	// 	}
-	// 	if(i < height1 - 1)
-	// 		div += arr[i] +'</div><br><div class="circle_show">';
-	// 	else div += arr[i] +'</div>';
-	// }
-	// tree.innerHTML += div;
-	// //tree.innerHTML += "asfdsaf";
-	// //tree.style.color = "red";  
+    */
 }
 function BinaryTree() {
 	alert("BinaryTree");
