@@ -2,11 +2,12 @@ var arr = [];
 var arr_left_right_space = [];
 var array_length = 32;
 var total_node = 1;
-
+var level = 4;
 function addvalue() {
 	for(var i = 0; i < array_length; i++)
 		arr[i] = (Math.floor((Math.random() * 1000) + 1));
 }
+//===================== Class Node =========================
 const SinglyLinkedListNode = class {
     constructor(nodeData, id) {
         this.data = nodeData;
@@ -31,7 +32,6 @@ const SinglyLinkedList = class {
         this.tail = node;
     }
 };
-//===================== Class Node =========================
 const Node = class {
     constructor(nodeData, id) {
         this.data = nodeData;
@@ -90,50 +90,56 @@ function msg(){
 }
 function General_Tree() {
 	addvalue();
+	total_node = 1;
 	for(var i = 0; i < array_length; i++)
 		console.log(arr[i]);
-	let llist = new SinglyLinkedList();
     for (let i = 1; i < array_length; i++) {
     	var data = document.getElementById(i.toString()).innerHTML;
     	if(data.includes('<br>') || data != parseInt(data).toString()){
     		alert("Inserted Data is not in Correct Format");
     		break;
     	}
-    	//console.log(parseInt(data));
-        llist.insertNode(data, i.toString());
     }
     var tableadd  = "<table border='1'>";
     arr_left_right_space[0] = 0;
-    for(var i = 0; i < 5; i++)
+    for(var i = 0; i < level; i++)
     	arr_left_right_space[i + 1] = (arr_left_right_space[i] * 2) + 1;
     // Generating Table
-    for(var i = 0, a = 0; i < 5; i++) {
+    for(var i = 0, a = 0; i <= level; i++) {
     	tableadd += "<tr>";
-    	console.log(arr_left_right_space[4 - i]);
-    	for(var j = 0; j < arr_left_right_space[5 - i]; j++)
-    		tableadd += "<td>=</td>";
-    	if(i == 0) 
-    		tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
-    	else {
-    		tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
-    		for(var j = 0; j < total_node; j++)
-    				tableadd += "<td></td>"
-				tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="1">'+arr[a++]+'</span></td>';
-		}
-    	for(var j = 0; j < arr_left_right_space[5 - i]; j++)
+    	for(var j = 0; j < arr_left_right_space[level - i]; j++)
     		tableadd += "<td></td>";
-    	tableadd += "</td>";
+    	if(i == 0) {
+    		tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+    		total_node *= 2;
+    	}
+    	else {
+    		if(total_node == 2) {
+    			tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+    			for(var j = 0; j < arr_left_right_space[level]; j++)
+    				tableadd += "<td></td>"
+				tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+				total_node *= 2;
+			} else {
+				tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+				for(var k = 0; k < total_node - 1; k++) {
+    				for(var j = 0; j < arr_left_right_space[level - i + 1]; j++)
+    					tableadd += '<td></td>';
+    				if(k < total_node - 2)
+						tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+				}
+				tableadd += '<td style=" border: 1pt solid black;"><span contentEditable="true" id="'+a+'">'+arr[a++]+'</span></td>';
+				total_node *= 2;
+			}
+		}
+		for(var j = 0; j < arr_left_right_space[level - i]; j++)
+    		tableadd += "<td></td>";
+    	tableadd += "</tr>";
     }
     tableadd += "</table>";
     document.getElementById("Generate_Table").innerHTML = tableadd;
     // Table Work Completed.
   	console.log("=============================");
-    /*let node = llist.head;
-    while (node != null) {
-        //console.log(String(node.data));
-        node = node.next;
-    }
-    */
 }
 function BinaryTree() {
 	alert("BinaryTree");
