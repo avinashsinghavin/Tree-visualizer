@@ -91,6 +91,17 @@ function msg(){
 function General_Tree() {
 	addvalue();
 	total_node = 1;
+	for(var i = 0; i < array_length; i++)
+		console.log(arr[i]);
+    /*
+    for (let i = 1; i < array_length; i++) {
+    	var data = document.getElementById(i.toString()).innerHTML;
+    	if(data.includes('<br>') || data != parseInt(data).toString()){
+    		alert("Inserted Data is not in Correct Format");
+    		break;
+    	}
+    }
+    */
     var tableadd  = "<table>";
     arr_left_right_space[0] = 0;
     for(var i = 0; i < level; i++)
@@ -136,6 +147,7 @@ function General_Tree() {
     tableadd += "</table>";
     document.getElementById("Generate_Table").innerHTML = tableadd;
     // Table Work Completed.
+  	console.log("=============================");
 }
 function BinaryTree() {
 	alert("BinaryTree");

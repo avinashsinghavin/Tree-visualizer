@@ -1,64 +1,46 @@
 <!DOCTYPE html>
-  <head>
-    <title>Tree visualizer</title>
-    <link rel="icon" type="image/x-icon" href="./source/title.png" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel='stylesheet' type='text/css' href='./style.css'/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="./script.js"></script>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav">
-        <img id = "nav-icon" src="./source/title.png">&nbsp;
-        <a class="navbar-brand">Tree visualizer</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Generate A Tree
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" onclick="General_Tree()">General Tree</a>
-                        <a class="dropdown-item" onclick="BinaryTree()">Binary Tree</a>
-                        <a class="dropdown-item" onclick="Binary_Search_Tree()">Binary Search Tree</a>
-                        <a class="dropdown-item" onclick="AVL_Tree()">AVL Tree</a>
-                        <a class="dropdown-item" onclick="Red_Black_Tree()">Red-Black Tree</a>
-                        <a class="dropdown-item" onclick="N_ary_Tree()">N-ary Tree</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Two
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Three
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" > Generate Tree</button> &nbsp;
-            <button class="btn btn-outline-success my-2 my-sm-0" > Sort Tree</button>
+    <head>
+        <title>Tree visualizer</title>
+        <link rel="icon" type="image/x-icon" href="./source/title.png" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel='stylesheet' type='text/css' href='./style.css'/>
+        <script src="./script.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+    <nav>
+        <div style=" width: 100%; height: 70px; background-color: #AAABCD;padding-top: 10px;">
+            <div style="float: left;">
+                &nbsp;&nbsp;
+                <img id = "nav-icon" src="./source/title.png" style="width: 50px; height: 50px;">&nbsp;
+                <a class="navbar-brand">Tree visualizer</a>
+                <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tree Traversals
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" onclick="Inorder()">Inorder</a>
+                    <a class="dropdown-item" onclick="Preorder()">Preorder</a>
+                    <a class="dropdown-item" onclick="Postorder()">Postorder</a>
+                </div>
+            </div>
+            <div style="float: right;padding-top: 10px;"> 
+                <button class="btn btn-outline-success my-2 my-sm-0" onclick="General_Tree()"> Generate Tree</button> &nbsp;
+                <button class="btn btn-outline-success my-2 my-sm-0" > Sort Tree</button> &nbsp;
+            </div>
         </div>
     </nav>
     <div>
-        <br>
+        <center>&nbsp;</center>
+    </div>
+    <div>
         <center>
-            <!-- <input type="text" value="1" name="i11" maxlength="3" style=" background-color: black; color: white;"> -->
+            <form>
+                <i style="color: black;">Change Speed &nbsp;<span id="displaySpeed"> 1 </span></i><br> Fast
+                <input type="range" min="1" max="100" value="10" id="speedRange"  onchange="updateSlider(this.value)" style="cursor: pointer;"> Slow &nbsp;
+            </form>
+            <br>
+            <!--
             <table>
                 <tr>
                     <td></td>
@@ -101,7 +83,7 @@
                     <td style="border-bottom:1pt solid black;"></td>
                     <td style="border-bottom:1pt solid black;"></td>
                     <td style="border-bottom:1pt solid black;"></td>
-                    <td style=" border: 1pt solid black;"><span contentEditable="true" id="2"> 11</span></td>
+                    <td style=" border: 1pt solid black;"><span contentEditable="true" id="2">11</span></td>
                     <td style="border-bottom:1pt solid black;"></td>
                     <td style="border-bottom:1pt solid black;"></td>
                     <td style="border-bottom:1pt solid black;"></td>
@@ -226,6 +208,14 @@
                     <td style=" border: 1pt solid black;"><span contentEditable="true" id="31">67</span></td>
                 </tr>
             </table>
+            -->
+            <div id="Generate_Table">
+                
+            </div>
+            <br><br>
+            <div id = "printing" style="background-color: #AABC09;">
+
+            </div>
         </center>
     </div>
     <footer>
@@ -242,7 +232,7 @@
         </div>
       </footer>
   </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
